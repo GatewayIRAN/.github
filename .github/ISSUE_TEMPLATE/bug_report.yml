@@ -1,0 +1,82 @@
+name: 🐛 Bug report
+description: Something behaves differently than documented
+title: "bug: "
+labels: ["type:bug", "status:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. A report with exact commands and complete
+        output gets fixed; a report without them gets a round of questions first.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight
+      options:
+        - label: I searched existing issues and this is not a duplicate
+          required: true
+        - label: I am on the latest release, or I have stated the version below
+          required: true
+        - label: This is not a security vulnerability (those go through private reporting)
+          required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `certway version`, or the commit SHA you built from
+      placeholder: v0.1.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - FreeBSD
+        - Other (state it below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened instead?
+      description: Paste the complete output, not a summary of it.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: |
+        The exact commands, in order. Redact secrets, keep everything else.
+      value: |
+        1. 
+        2. 
+        3. 
+    validations:
+      required: true
+
+  - type: textarea
+    id: verbose
+    attributes:
+      label: Verbose log
+      description: Re-run with `--verbose` and paste the output. This is usually decisive.
+      render: shell
+    validations:
+      required: false

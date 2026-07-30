@@ -1,0 +1,63 @@
+name: ✨ Feature request
+description: Propose a capability that does not exist yet
+title: "feat: "
+labels: ["type:feature", "status:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proposals that describe a concrete problem get built. Proposals that
+        describe a solution without the problem usually stall.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight
+      options:
+        - label: I searched existing issues and discussions for this idea
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you hitting?
+      description: Describe the situation you are actually in, not the feature you want.
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: How do you work around it today?
+      description: If there is no workaround, say so — that raises the priority.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed shape
+      description: Sketch the flag, command or API you have in mind.
+      render: shell
+    validations:
+      required: false
+
+  - type: dropdown
+    id: breaking
+    attributes:
+      label: Would this change existing behaviour?
+      options:
+        - "No — purely additive"
+        - "Yes — it changes a default"
+        - "Yes — it removes or renames something"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Participation
+      options:
+        - label: I am willing to open a pull request for this
+          required: false

@@ -1,0 +1,7 @@
+# Default reviewer for everything.
+*                     @MrAryanMiri
+
+# Anything that can change what ships, or what it is allowed to do.
+/.github/workflows/   @MrAryanMiri
+/SECURITY.md          @MrAryanMiri
+/LICENSE              @MrAryanMiri

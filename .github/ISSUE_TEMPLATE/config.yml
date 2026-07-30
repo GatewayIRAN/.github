@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Question or discussion
+    url: https://github.com/GatewayIRAN/.github/discussions
+    about: Ask how something works. Questions get answered here, not in issues.
+  - name: 🔐 Report a security vulnerability
+    url: https://github.com/GatewayIRAN/certway/security/advisories/new
+    about: Never report a vulnerability in a public issue. Use private reporting.
+  - name: 📖 Documentation
+    url: https://gatewayiran.github.io
+    about: Installation, configuration and usage reference.
