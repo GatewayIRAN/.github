@@ -18,9 +18,8 @@
 
 - [ ] Commits are signed off (`git commit -s`) — the DCO check enforces this
 - [ ] Commit messages follow Conventional Commits
-- [ ] `gofmt -l .` prints nothing
-- [ ] `go vet ./...` is clean
-- [ ] `go test ./...` passes
+- [ ] Formatter and linter are clean
+- [ ] The test suite passes locally
 - [ ] Tests cover the change; a bug fix has a regression test
 - [ ] Documentation updated in this same pull request if behaviour changed
 - [ ] No new third-party dependency, or the description below justifies it

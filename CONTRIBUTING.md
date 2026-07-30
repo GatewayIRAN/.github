@@ -18,7 +18,7 @@ repository overrides it.
 — no legal paperwork, just one trailer line:
 
 ```bash
-git commit -s -m "fix(core): reject empty SNI"
+git commit -s -m "fix(core): reject an empty SNI value"
 ```
 
 That appends `Signed-off-by: Your Name <your@email>`. The DCO check enforces it.
@@ -35,12 +35,12 @@ git config commit.gpgsign true
 The release notes are generated from them, so the format is load-bearing:
 
 ```
-feat(cli): add --dns-provider flag
-fix(acme): retry on badNonce instead of failing the order
+feat(cli): add a --dns-provider flag
+fix(core): retry a stale nonce instead of failing the order
 docs(readme): document the renewal threshold
 chore(deps): bump actions/checkout to v4.2.2
-perf(store): avoid re-reading the account key per order
-refactor(http01): extract the challenge server
+perf(store): stop re-reading the account key per order
+refactor(solver): extract the challenge server
 test(order): cover the wildcard path
 ```
 
@@ -51,13 +51,8 @@ Allowed types: `feat`, `fix`, `docs`, `chore`, `perf`, `refactor`, `test`, `buil
 1. Fork, then branch from `main`. Name it `feat/short-thing` or `fix/short-thing`.
 2. Make the change. Add or adjust tests — a bug fix without a regression test
    will be asked for one.
-3. Run the full local gate before pushing:
-
-   ```bash
-   gofmt -l .        # must print nothing
-   go vet ./...
-   go test ./...
-   ```
+3. Run whatever local gate the repository documents before pushing — formatter,
+   linter, tests. If CI runs it, run it locally first.
 
 4. Open a pull request against `main`. Fill in the template; "see title" is not
    a description.
@@ -69,8 +64,8 @@ Allowed types: `feat`, `fix`, `docs`, `chore`, `perf`, `refactor`, `test`, `buil
 - Small and reviewable beats large and impressive. Split big changes.
 - Public API changes need a documentation change in the same pull request.
   Undocumented means unfinished.
-- New third-party dependencies need a justification. The default answer is the
-  standard library.
+- New third-party dependencies need a justification. The default answer is
+  whatever ships with the platform already.
 - No telemetry, no analytics, no phoning home. This is not negotiable.
 
 ## What we will not merge
