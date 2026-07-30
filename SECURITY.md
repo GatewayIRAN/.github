@@ -52,15 +52,16 @@ privileged local access.
 
 ## Verifying what you run
 
-Every release ships a `checksums.txt` alongside the binaries. Verify before you
-trust:
+There are no published releases yet. When there are, each will ship a
+`checksums.txt` alongside its artefacts, and verifying it before you trust it is
+the expected step:
 
 ```bash
 sha256sum -c checksums.txt --ignore-missing
 ```
 
-Release tags are signed. Commits on `main` are signed and the branch requires
-signed commits.
+Commits on `main` are signed today, and the branch ruleset requires it. Release
+tags will be signed on the same basis.
 
 ## Supported versions
 

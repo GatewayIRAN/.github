@@ -5,7 +5,7 @@
 
 <br>
 
-**Shared project health files and reusable workflows for every GatewayIRAN repository.**
+**Shared project health files and issue forms for every GatewayIRAN repository.**
 
 </div>
 
