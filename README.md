@@ -42,80 +42,14 @@ place and are edited once.
 
 ## Reusable workflows
 
-Each repository calls these instead of copying a pipeline. Changing CI across
-the whole account means editing one file here.
+Each repository calls these instead of copying a pipeline, so changing a rule
+across the whole account means editing one file here.
 
-```mermaid
-graph LR
-    A[push / pull_request] --> B[reusable-go-ci]
-    B --> C[gofmt · vet · tidy]
-    B --> D[test: linux · macOS · windows]
-    B --> E[build: 6 targets]
-    F[push tag v*] --> G[reusable-release]
-    G --> H[cross compile · trimpath]
-    H --> I[checksums.txt]
-    H --> J[provenance attestation]
-    I --> K[GitHub Release]
-    J --> K
-```
-
-<details>
-<summary><b>Continuous integration</b></summary>
-
-<br>
-
-```yaml
-name: CI
-on:
-  push:
-    branches: [main]
-  pull_request:
-
-permissions:
-  contents: read
-
-jobs:
-  ci:
-    uses: GatewayIRAN/.github/.github/workflows/reusable-go-ci.yml@main
-    with:
-      coverage-threshold: 70
-```
-
-Runs `gofmt`, `go vet`, a `go mod tidy` drift check, the race-enabled test suite
-on Linux, macOS and Windows, and a cross-compile across six targets. The
-coverage floor is optional; omit it and the gate is skipped.
-
-</details>
-
-<details>
-<summary><b>Release</b></summary>
-
-<br>
-
-```yaml
-name: Release
-on:
-  push:
-    tags: ["v*"]
-
-permissions:
-  contents: read
-
-jobs:
-  release:
-    uses: GatewayIRAN/.github/.github/workflows/reusable-release.yml@main
-    with:
-      binary-name: certway
-      main-package: ./cmd/certway
-      version: ${{ github.ref_name }}
-```
-
-Builds with `-trimpath` and a `SOURCE_DATE_EPOCH` taken from the tagged commit,
-so the same tag produces the same bytes. Emits `checksums.txt`, attaches a
-signed build-provenance attestation, and publishes the release with generated
-notes.
-
-</details>
+> [!NOTE]
+> Only the language-agnostic workflow is published today. Build, test and
+> release pipelines are toolchain-specific, and no project here has committed to
+> a toolchain yet — an unused workflow that names one would be a claim the
+> repositories do not back up. They land with the first project that needs them.
 
 <details>
 <summary><b>Dependency review</b></summary>
@@ -152,16 +86,10 @@ Fails a pull request that pulls in a dependency with a known vulnerability at
   a SHA cannot.
 - **Least-privilege tokens.** Every workflow declares `permissions:` explicitly
   and starts from `contents: read`.
+- **Reproducible, attested releases.** When release pipelines land they will
+  build with a pinned source date and ship a checksum manifest plus a signed
+  provenance statement.
 - **No telemetry.** Nothing built here reports usage anywhere.
-
-<br>
-
-## Verifying a release
-
-```bash
-sha256sum -c checksums.txt --ignore-missing
-gh attestation verify <binary> --owner GatewayIRAN
-```
 
 <br>
 
