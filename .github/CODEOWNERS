@@ -1,7 +1,7 @@
 # Default reviewer for everything.
-*                     @MrAryanMiri
+*                     @GatewayIRAN
 
 # Anything that can change what ships, or what it is allowed to do.
-/.github/workflows/   @MrAryanMiri
-/SECURITY.md          @MrAryanMiri
-/LICENSE              @MrAryanMiri
+/.github/workflows/   @GatewayIRAN
+/SECURITY.md          @GatewayIRAN
+/LICENSE              @GatewayIRAN
